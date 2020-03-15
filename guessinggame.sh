@@ -2,7 +2,7 @@
 # guessinggame.sh
 
 # Variable used to know the number of files in the directory
-num_files=0
+num_file=0
 
 # Variable used to know the number of files introduced by the user
 guess_num=0
@@ -25,14 +25,14 @@ function guessing_tip {
 # For used to count the number of files
 for i in $(ls)
 do
-	num_files=$(expr $num_files + 1)
+	num_file=$(expr $num_file + 1)
 done
 
 echo -e "How many files are in the current directory ?"
 read guess_num
 
 # While used to repeat the loop until the user will answer correctly
-while [[ $guess_num -ne $num_files ]]
+while [[ $guess_num -ne $num_file ]]
 do
 	guessing_tip
 done

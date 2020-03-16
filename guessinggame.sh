@@ -25,7 +25,7 @@ function guessing_tip {
 }
 
 handling_mistakes () {
-	while [[ $guess_num =~ .+[0-9].+ ]] || [[ $guess_num =~ [0-9].+ ]] || [[ $guess_num =~ .+[0-9] ]]
+	while [[ $guess_num =~ .+[0-9].+ ]] || [[ $guess_num =~ [0-9].+ ]] || [[ $guess_num =~ .+[0-9] ]] || [[ ! $guess_num =~ [0-9] ]]
 	do
         	echo "Introduce just the number with no additional signs"
         	read guess_num
@@ -33,7 +33,7 @@ handling_mistakes () {
 }
 
 # For used to count the number of files
-for i in $(ls)
+for i in $(ls -Fa | egrep -v "/")
 do
 	num_file=$(expr $num_file + 1)
 done

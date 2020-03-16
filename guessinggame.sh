@@ -14,12 +14,22 @@ function guessing_tip {
 		echo "The number guessed is bigger than the number of files in the directory."
 		echo "Guess again."
 		read guess_num
+		handling_mistakes
 	elif [[ $guess_num -lt $num_file ]]
 	then
 	   	echo "The number guessed is smaller than the number of files in the directory."
                 echo "Guess again."
 		read guess_num
+		handling_mistakes
 	fi
+}
+
+handling_mistakes () {
+	while [[ $guess_num =~ .+[0-9].+ ]] || [[ $guess_num =~ [0-9].+ ]] || [[ $guess_num =~ .+[0-9] ]]
+	do
+        	echo "Introduce just the number with no additional signs"
+        	read guess_num
+	done
 }
 
 # For used to count the number of files
@@ -30,6 +40,7 @@ done
 
 echo -e "How many files are in the current directory ?"
 read guess_num
+handling_mistakes
 
 # While used to repeat the loop until the user will answer correctly
 while [[ $guess_num -ne $num_file ]]
@@ -37,7 +48,9 @@ do
 	guessing_tip
 done
 
-echo "Congratulations, you have guessed well."
-
+if [[ $guess_num -eq $num_file ]]
+then
+	echo "Congratulations, you have guessed well."
+fi
 
 
